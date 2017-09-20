@@ -1,0 +1,23 @@
+{
+  "name": "climbing_app_backend",
+  "version": "1.0.0",
+  "description": "Backend for the climbing app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Karina",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "kcors": "^2.2.1",
+    "koa": "^2.3.0",
+    "koa-logger": "^3.0.1",
+    "koa-router": "^7.2.1",
+    "mongoose": "^4.11.12"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
