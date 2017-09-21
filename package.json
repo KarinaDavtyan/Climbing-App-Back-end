@@ -11,11 +11,16 @@
   "author": "Karina",
   "license": "UNLICENSED",
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "jsonwebtoken": "^8.0.1",
     "kcors": "^2.2.1",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
+    "koa-jwt": "^3.2.2",
     "koa-logger": "^3.0.1",
     "koa-router": "^7.2.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "mongoose": "^4.11.12"
   },
   "devDependencies": {

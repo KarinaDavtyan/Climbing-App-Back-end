@@ -1,4 +1,7 @@
-const Wall = require('../models/walls.model')
+const Wall = require('../models/walls.model');
+const mongoose = require('mongoose');
+const User = require('../models/users.model');
+
 
 const getAllWalls = async (ctx, next) => {
   ctx.body = await Wall.find();
@@ -22,7 +25,7 @@ const getWall = async (ctx, next) => {
 
 const postWall = async (ctx, next) => {
   console.log("we are in the postWall");
-  let wall = await Wall.findOne({name: ctx.params.name});
+  let wall = await Wall.findOne({name: ctx.request.body.name});
   if (!wall) {
     try {
       console.log(ctx.request.body);
@@ -31,8 +34,8 @@ const postWall = async (ctx, next) => {
         path: ctx.request.body.path,
         difficulty: ctx.request.body.difficulty,
         gym: ctx.request.body.gym,
-        creator: ctx.request.body.user
-        // user: ctx.user._id //pseudo !!!
+      　creator: ctx.user._id
+        // creator: ctx.user._id //pseudo !!!
       })
       await wall.save();
       console.log('wall is saved');
@@ -41,25 +44,12 @@ const postWall = async (ctx, next) => {
       console.log(e);
     }
   } else {
-    ctx.body = 'The route name is already used'
+    ctx.body = 'The route title is already taken';
     console.log('choose another wall name');
   }
 }
-// const switchToComplete = async (ctx, next) => {
-//
-// }
-// const wallsController = async (ctx, next) => {
-//
-// }
-// const createUser = async (ctx, next) => {
-//
-// }
-// const signIn= async (ctx, next) => {
-//
-// }
-// const showMe= async (ctx, next) => {
-//
-// }
+
+
 
 module.exports = {
   getAllWalls,
