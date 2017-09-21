@@ -14,16 +14,21 @@ const wallsController = require('./controllers/walls.controller');
 //   await next();
 // }
 
+let options = async function() {
+  this.body = "Allow: HEAD,GET,PUT,DELETE,OPTIONS";
+};
 //to avoid confusion, 'wall' may be used instead of 'route' - the climbing term
 
 router.get('/routes', wallsController.getAllWalls);
-// router.get('/routes/:id', wallsController.getWall);
-// router.post('./routes', wallsController.postWall);
+router.get('/routes/:name', wallsController.getWall);
+router.post('/routes', wallsController.postWall);
 // router.post('./completion', wallsController.switchToComplete);
-// router.post('./routes/:id/comment', wallsController.commentRoute);
+// router.post('./routes/:name/comment', wallsController.commentRoute);
 //
 // router.post('./users', usersController.createUser); //?? what is it doing
 // router.get('./sign-in', usersController.signIn);
 // router.get('./me', usersController.showMe);
+
+router.options('/', options);
 
 module.exports = router;

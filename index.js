@@ -2,11 +2,13 @@ const Koa = require('koa');
 let app = new Koa();
 const logger = require('koa-logger');
 const cors = require('kcors');
+var bodyParser = require('koa-bodyparser');
 const router = require('./routes.js');
 require('./db');
 
 app.use(logger());
 app.use(cors());
+app.use(bodyParser());
 
 // app.use(async (ctx, next) => {
 //   // Get content of Authorization header
