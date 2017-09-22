@@ -1,8 +1,8 @@
-const Completion = require('../models/completion.model')
 const moment = require('moment');
 
 const User = require('../models/users.model');
 const Wall = require('../models/walls.model');
+const Completion = require('../models/completion.model')
 
 const completeWall = async (ctx, next) => {
   try {
@@ -18,7 +18,7 @@ const completeWall = async (ctx, next) => {
     await completion.save();
     ctx.status = 201;
   } catch (e) {
-    console.log("ERROR in completion",e);
+    console.log("error is catched", e);
   }
 }
 

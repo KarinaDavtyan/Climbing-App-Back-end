@@ -1,5 +1,6 @@
-const Wall = require('../models/walls.model');
 const mongoose = require('mongoose');
+
+const Wall = require('../models/walls.model');
 const User = require('../models/users.model');
 
 const getAllWalls = async (ctx, next) => {
@@ -45,8 +46,6 @@ const postWall = async (ctx, next) => {
     console.log('choose another wall name');
   }
 }
-
-
 
 module.exports = {
   getAllWalls,

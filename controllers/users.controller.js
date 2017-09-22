@@ -1,7 +1,8 @@
-const User = require('../models/users.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const filterProps = require('../helpers').filterProps; ///??? why?
+
+const User = require('../models/users.model');
+const filterProps = require('../helpers').filterProps;
 
 const createUser = async (ctx, next) => {
   let user = await User.findOne({username: ctx.request.body.username});
@@ -42,7 +43,6 @@ const signIn = async (ctx, next) => {
   try {
     if (user === null) throw new Error();
     const matching = await bcrypt.compare(password, user.password);
-    console.log("matching", matching);
     console.log(user);
     if (matching) {
       let userToken = jwt.sign(
@@ -60,13 +60,14 @@ const signIn = async (ctx, next) => {
       console.log("User", username, "signed-in");
       return;
     } else {
+      console.log('wrong password');
       ctx.body = {
         message: 'Wrong credentials'
       };
       throw new Error();
     }
   } catch (e) {
-    console.log('error', e);
+    console.log('error is catched', e);
     ctx.body = {
       message: 'Wrong credentials'
     };

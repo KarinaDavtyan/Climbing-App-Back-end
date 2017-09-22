@@ -8,7 +8,6 @@ const wallSchema = mongoose.Schema({
   creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   rating: Number,
   votes: Number,
-  // user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 })
 
 const Wall = mongoose.model('Wall', wallSchema);
