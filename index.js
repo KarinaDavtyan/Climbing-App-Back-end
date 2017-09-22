@@ -14,12 +14,14 @@ app.use(cors());
 app.use(bodyParser());
 
 // Middleware for authenticating the user
-// app.use(async (ctx, next) => {
-//   const authorization = ctx.headers['authorization'];
-//   const token = authorization.split(' ')[1];
-//   if(token) ctx.user = await User.findOne({username:'Arol'})
-//   await next();
-// })
+app.use(async (ctx, next) => {
+  // const authorization = ctx.headers['authorization'];
+  // console.log(authorization);
+  // const token = authorization.split(' ')[1];
+  // if(token)
+  ctx.user = await User.findOne({username:'Karina'});
+  await next();
+})
 
 // app.use(function(ctx, next){
 //   return next().catch((err) => {

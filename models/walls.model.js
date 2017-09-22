@@ -5,7 +5,9 @@ const wallSchema = mongoose.Schema({
   path: String,
   difficulty: String,
   gym: String,
-  creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+  creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  rating: Number,
+  votes: Number,
   // user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 })
 

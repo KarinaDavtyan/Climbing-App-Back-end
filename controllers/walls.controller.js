@@ -2,7 +2,6 @@ const Wall = require('../models/walls.model');
 const mongoose = require('mongoose');
 const User = require('../models/users.model');
 
-
 const getAllWalls = async (ctx, next) => {
   ctx.body = await Wall.find();
   console.log("we just got all the routes!");
