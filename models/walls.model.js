@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const wallSchema = mongoose.Schema({
   name: String,
+  date: Date,
   path: String,
   difficulty: String,
   gym: String,

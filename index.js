@@ -22,13 +22,17 @@ app.use(KoaJWT({ secret: jwtSecret}).unless({path: ['/sign-in', '/routes', '/use
 app.use(async (ctx, next) => {
   // Getting the content of authorization header and
   // setting ctx.user to be the user binded to the token
-  const authorization = ctx.headers['authorization'];
-  const [strategy, token] = authorization.split(' ');
-  if(strategy !== 'Bearer') return await next();
-  const tokenData = jwt.verify(token, jwtSecret);
-  console.log(tokenData);
-  ctx.user = await User.findOne({username:tokenData.username});
-  await next();
+  if (ctx.headers['authorization']) {
+    const authorization = ctx.headers['authorization'];
+    const [strategy, token] = authorization.split(' ');
+    if(strategy !== 'Bearer') return await next();
+    const tokenData = jwt.verify(token, jwtSecret);
+    console.log(tokenData);
+    ctx.user = await User.findOne({username:tokenData.username});
+    await next();
+  } else {
+    await next();
+  }
 })
 
 app.use(router.routes());

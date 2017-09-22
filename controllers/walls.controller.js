@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const Wall = require('../models/walls.model');
 const User = require('../models/users.model');
@@ -30,6 +31,7 @@ const postWall = async (ctx, next) => {
       console.log(ctx.request.body);
       let wall = new Wall({
         name: ctx.request.body.name,
+        date: moment(),
         path: ctx.request.body.path,
         difficulty: ctx.request.body.difficulty,
         gym: ctx.request.body.gym,
