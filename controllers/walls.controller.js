@@ -24,7 +24,6 @@ const getWall = async (ctx, next) => {
 }
 
 const postWall = async (ctx, next) => {
-  console.log("we are in the postWall");
   let wall = await Wall.findOne({name: ctx.request.body.name});
   if (!wall) {
     try {
@@ -35,7 +34,6 @@ const postWall = async (ctx, next) => {
         difficulty: ctx.request.body.difficulty,
         gym: ctx.request.body.gym,
       　creator: ctx.user._id
-        // creator: ctx.user._id //pseudo !!!
       })
       await wall.save();
       console.log('wall is saved');

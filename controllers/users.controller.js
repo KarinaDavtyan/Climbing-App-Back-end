@@ -31,9 +31,32 @@ const createUser = async (ctx, next) => {
     ctx.status = 201;
   }
 }
-// const signIn = async (ctx, next) => {
-//
-// }
+
+const signIn = async (ctx, next) => {
+  const auth = ctx.request.headers.authorization;
+  const base64 = auth.split(' ')[1];
+  const decoded = Buffer.from(base64, 'base64').toString("ascii");
+  const [username, password] = decoded.split(':');
+  const user = await User.findOne({username});
+  console.log(username, password);
+  try {
+    if (user === null) throw new Error();
+    const matching = await bcrypt.compare(password, user.password);
+    if (matching) {
+      ctx.body = filterProps(user.toObject(), ['username', 'category', 'avatar', 'points']);
+      ctx.status = 200;
+      console.log("User", username, "signed-in");
+      return;
+    } else throw new Error();
+  } catch (e) {
+    ctx.body = {
+      message: 'Wrong credentials'
+    };
+    ctx.status = 401;
+    return;
+  }
+}
+
 const showMe= async (ctx, next) => {
   console.log('showing user', ctx.body);
   ctx.body = ctx.user;
@@ -43,6 +66,6 @@ const showMe= async (ctx, next) => {
 
 module.exports = {
   createUser,
+  signIn,
   showMe
-
 }

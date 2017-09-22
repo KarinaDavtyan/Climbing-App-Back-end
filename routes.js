@@ -3,6 +3,7 @@ const router = require('koa-router')();
 
 const wallsController = require('./controllers/walls.controller');
 const usersController = require('./controllers/users.controller');
+const completionController = require('./controllers/completion.controller');
 
 // const authorize = async (ctx, next) => {
 //   console.log('authorized');
@@ -21,16 +22,17 @@ router.get('/routes/:name', wallsController.getWall);
 router.post('/routes', wallsController.postWall);
 
 router.post('/users', usersController.createUser);
-// router.get('./sign-in', usersController.signIn);
+router.get('/sign-in', usersController.signIn);
 router.get('/me', usersController.showMe);
 
-// router.post('./completion', wallsController.completeWall);
+router.post('/completion', completionController.completeWall);
 
-// router.post('./routes/:name/comment', wallsController.commentRoute);
+// router.post('/routes/:name/comment', wallsController.commentRoute);
 
 let options = async function() {
-  this.body = "Allow: HEAD,GET,PUT,DELETE,OPTIONS";
+  this.body = "Allow: HEAD,xGET,PUT,DELETE,OPTIONS";
   ;}
+
 router.options('/', options);
 
 module.exports = router;
