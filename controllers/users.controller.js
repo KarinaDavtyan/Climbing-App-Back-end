@@ -1,6 +1,8 @@
 const User = require('../models/users.model');
 const bcrypt = require('bcrypt');
 
+const filterProps = require('../helpers').filterProps; ///??? why?
+
 const createUser = async (ctx, next) => {
   let user = await User.findOne({username: ctx.request.body.username});
   if (user) {
@@ -13,7 +15,6 @@ const createUser = async (ctx, next) => {
   } else {
     const saltRounds = 10;
     let hashedPassword = await bcrypt.hash(ctx.request.body.password, saltRounds);
-    console.log(hashedPassword);
     const user = new User({
       username: ctx.request.body.username,
       password: hashedPassword,
@@ -22,7 +23,11 @@ const createUser = async (ctx, next) => {
       points: ctx.request.body.points
     })
     console.log('Creating user ...');
-    await user.save();
+    let newUser = await user.save();
+    // console.log('user', user._doc);
+    ctx.body = filterProps(user.toObject(), ['username', 'category', 'avatar', 'points']);
+    console.log(newUser);
+    console.log(ctx.body);
     ctx.status = 201;
   }
 }
