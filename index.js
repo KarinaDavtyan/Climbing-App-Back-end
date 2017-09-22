@@ -4,7 +4,8 @@ const logger = require('koa-logger');
 const cors = require('kcors');
 var bodyParser = require('koa-bodyparser');
 const router = require('./routes.js');
-const jwt = require('koa-jwt');
+const KoaJWT = require('koa-jwt');
+const jwt = require('jsonwebtoken');
 require('./db');
 
 const User = require('./models/users.model');
@@ -13,13 +14,21 @@ app.use(logger());
 app.use(cors());
 app.use(bodyParser());
 
+const jwtSecret = 'i?!haTe!?cLimbinG!&!150_';
+
+app.use(KoaJWT({ secret: jwtSecret}).unless({path: ['/sign-in', '/routes', '/users']}));
 // Middleware for authenticating the user
 app.use(async (ctx, next) => {
-  // const authorization = ctx.headers['authorization'];
-  // console.log(authorization);
-  // const token = authorization.split(' ')[1];
+  // Getting the content of authorization header and
+  // setting ctx.user to be the user binded to the token
+  const authorization = ctx.headers['authorization'];
+  const [strategy, token] = authorization.split(' ');
+  if(strategy !== 'Bearer') return await next();
+
+  const tokenData = jwt.verify(token, jwtSecret);
+  console.log(tokenData);
   // if(token)
-  ctx.user = await User.findOne({username:'Karina'});
+  ctx.user = await User.findOne({username:tokenData.username});
   await next();
 })
 
@@ -34,7 +43,6 @@ app.use(async (ctx, next) => {
 //   });
 // });
 
-// app.use(jwt({ secret: 'climbing' }));
 //
 // app.use(function(ctx){
 //   if (ctx.url.match(/^\/sign-in/) && ctx.url.match(/^\/me/) ) {

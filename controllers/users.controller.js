@@ -1,6 +1,6 @@
 const User = require('../models/users.model');
 const bcrypt = require('bcrypt');
-
+const jwt = require('jsonwebtoken');
 const filterProps = require('../helpers').filterProps; ///??? why?
 
 const createUser = async (ctx, next) => {
@@ -42,13 +42,31 @@ const signIn = async (ctx, next) => {
   try {
     if (user === null) throw new Error();
     const matching = await bcrypt.compare(password, user.password);
+    console.log("matching", matching);
+    console.log(user);
     if (matching) {
-      ctx.body = filterProps(user.toObject(), ['username', 'category', 'avatar', 'points']);
+      let userToken = jwt.sign(
+        {  username: user.username  },
+        'i?!haTe!?cLimbinG!&!150_',
+        { expiresIn: '1h' }
+      );
+      console.log(userToken);
+      let userData = filterProps(user.toObject(), ['username', 'category', 'avatar', 'points']);
+      ctx.body = {
+        "token": userToken,
+        "user": userData
+      }
       ctx.status = 200;
       console.log("User", username, "signed-in");
       return;
-    } else throw new Error();
+    } else {
+      ctx.body = {
+        message: 'Wrong credentials'
+      };
+      throw new Error();
+    }
   } catch (e) {
+    console.log('error', e);
     ctx.body = {
       message: 'Wrong credentials'
     };

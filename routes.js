@@ -19,7 +19,7 @@ const completionController = require('./controllers/completion.controller');
 
 router.get('/routes', wallsController.getAllWalls);
 router.get('/routes/:name', wallsController.getWall);
-router.post('/routes', wallsController.postWall);
+router.post('/route', wallsController.postWall);
 
 router.post('/users', usersController.createUser);
 router.get('/sign-in', usersController.signIn);
