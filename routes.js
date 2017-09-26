@@ -26,6 +26,7 @@ router.post('/route', wallsController.postWall);
 router.post('/users', usersController.createUser);
 router.get('/sign-in', usersController.signIn);
 router.get('/me', usersController.showMe);
+router.get('/users/:userId', usersController.getUser);
 
 
 router.post('/completion', completionController.completeWall);

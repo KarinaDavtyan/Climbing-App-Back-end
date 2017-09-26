@@ -86,11 +86,15 @@ const showMe= async (ctx, next) => {
   ctx.body = ctx.user;
 }
 
+const getUser = async (ctx, next) => {
+  ctx.body = await User.findOne({username: ctx.request.body.username})
+}
 
 
 module.exports = {
   getAllUsers,
   createUser,
   signIn,
-  showMe
+  showMe,
+  getUser,
 }
