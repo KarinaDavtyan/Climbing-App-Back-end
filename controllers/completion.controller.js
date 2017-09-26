@@ -13,9 +13,20 @@ const completeWall = async (ctx, next) => {
       date: moment(),
       rating: ctx.request.body.rating,
       user: ctx.user._id,
-      wall: ctx.request.body.wall
+      wall: ctx.request.body.name
     })
     await completion.save();
+
+    // Add points to the user
+    // let user = await User.findOne({name: ctx.request.body.name});
+    console.log(ctx.request.body.name);
+    const wall = await Wall.findOne({name: ctx.request.body.name});
+    console.log(wall);
+    console.log(wall.points());
+    await User.findOneAndUpdate({_id: ctx.user._id}, {
+      $inc: { points: wall.points() }
+    })
+
     ctx.status = 201;
   } catch (e) {
     console.log("error is catched", e);

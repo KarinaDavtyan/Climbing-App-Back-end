@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
   password: String,
   category: String,
   avatar: String,
-  points: Number
+  points: {type: Number, default: 0}
 })
 
 const User = mongoose.model('User', userSchema);

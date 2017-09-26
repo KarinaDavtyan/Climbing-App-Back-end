@@ -22,9 +22,11 @@ router.get('/ranking', usersController.getAllUsers);
 router.get('/routes/:name', wallsController.getWall);
 router.post('/route', wallsController.postWall);
 
+
 router.post('/users', usersController.createUser);
 router.get('/sign-in', usersController.signIn);
 router.get('/me', usersController.showMe);
+
 
 router.post('/completion', completionController.completeWall);
 
