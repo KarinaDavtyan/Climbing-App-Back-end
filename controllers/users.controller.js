@@ -4,6 +4,11 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/users.model');
 const filterProps = require('../helpers').filterProps;
 
+const getAllUsers = async (ctx, next) => {
+  ctx.body = await User.find();
+  console.log("We just got all the users");
+}
+
 const createUser = async (ctx, next) => {
   let user = await User.findOne({username: ctx.request.body.username});
   if (user) {
@@ -84,6 +89,7 @@ const showMe= async (ctx, next) => {
 
 
 module.exports = {
+  getAllUsers,
   createUser,
   signIn,
   showMe

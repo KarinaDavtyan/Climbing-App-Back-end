@@ -16,7 +16,7 @@ app.use(bodyParser());
 
 const jwtSecret = 'i?!haTe!?cLimbinG!&!150_';
 
-app.use(KoaJWT({ secret: jwtSecret}).unless({path: ['/sign-in', '/routes', '/users']}));
+app.use(KoaJWT({ secret: jwtSecret}).unless({path: ['/sign-in', '/routes', '/users', '/ranking']}));
 
 // Middleware for authenticating the user
 app.use(async (ctx, next) => {

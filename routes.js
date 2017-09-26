@@ -18,6 +18,7 @@ const completionController = require('./controllers/completion.controller');
 //to avoid confusion, 'wall' may be used instead of 'route' - the climbing term
 
 router.get('/routes', wallsController.getAllWalls);
+router.get('/ranking', usersController.getAllUsers);
 router.get('/routes/:name', wallsController.getWall);
 router.post('/route', wallsController.postWall);
 
