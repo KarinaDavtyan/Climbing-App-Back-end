@@ -10,6 +10,7 @@ Follow instructions to set your Climbing App BackEnd.
 
 * Fork and Clone this Repo
 * Run 'npm install'
+* Run 'mongod'
 * Run 'nodemon'
 
 Now go [here](https://github.com/KarinaDavtyan/Climbing-App-Front-end) to get Front End. And follow installation process.
