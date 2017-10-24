@@ -6,14 +6,13 @@ Mobile React app to post climbing routes and compete with other climbers by gett
 
 ## Installation
 
-Go [here](https://github.com/KarinaDavtyan/Climbing-App-Front-end) to get Front End. And follow installation process.
 Follow instructions to set your Climbing App BackEnd.
 
 * Fork and Clone this Repo
 * Run 'npm install'
 * Run 'nodemon'
 
-No go [here](https://github.com/KarinaDavtyan/Climbing-App-Front-end) to get Front End. And follow installation process.
+Now go [here](https://github.com/KarinaDavtyan/Climbing-App-Front-end) to get Front End. And follow installation process.
 
 ## Tech Stack
 
