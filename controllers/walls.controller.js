@@ -28,11 +28,12 @@ const postWall = async (ctx, next) => {
   let wall = await Wall.findOne({name: ctx.request.body.name});
   if (!wall) {
     try {
+      const path = await s3.uploadImage(image);
       console.log(ctx.request.body);
       let wall = new Wall({
         name: ctx.request.body.name,
         date: moment(),
-        path: ctx.request.body.path,
+        path,
         difficulty: ctx.request.body.difficulty,
         gym: ctx.request.body.gym,
       　creator: ctx.user._id

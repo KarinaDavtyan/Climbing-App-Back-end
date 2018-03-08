@@ -12,9 +12,16 @@ require('./db');
 
 app.use(logger());
 app.use(cors());
-app.use(bodyParser());
+app.use(
+  koaBody({
+    multipart: true,
+  })
+)
+// app.use(bodyParser());
 
-const jwtSecret = 'i?!haTe!?cLimbinG!&!150_';
+require('dotenv').config();
+
+const jwtSecret = process.env.JWT_SECRET;
 
 app.use(KoaJWT({ secret: jwtSecret}).unless({path: ['/sign-in', '/routes', '/users', '/ranking', '/points']}));
 
