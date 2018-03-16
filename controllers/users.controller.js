@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/users.model');
 const filterProps = require('../helpers').filterProps;
 
+
 const getAllUsers = async (ctx, next) => {
   ctx.body = await User.find();
   console.log("We just got all the users");
@@ -52,7 +53,7 @@ const signIn = async (ctx, next) => {
     if (matching) {
       let userToken = jwt.sign(
         {  username: user.username  },
-        'i?!haTe!?cLimbinG!&!150_',
+        process.env.JWT_SECRET,
         { expiresIn: '1h' }
       );
       console.log(userToken);
